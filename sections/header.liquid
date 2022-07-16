@@ -1,0 +1,913 @@
+<script async src="//361631.tctm.co/t.js"></script>
+{% if section.settings.message %}
+  <style>
+    {% if section.settings.logo != blank %}
+      .site-header__logo-image {
+        max-width: {{ section.settings.logo_max_width | escape }}px;
+      }
+    {% endif %}
+ 
+      .site-header__logo-image {
+        margin: 0;
+      }
+  </style>
+{% endif %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section"> 
+  {% if section.settings.message %}
+    {% if section.settings.home_page_only == false or template.name == 'index' %} 
+      <style>
+        .announcement-bar {
+          background-color: {{ section.settings.color_bg }};
+        }
+
+        .announcement-bar--link:hover {
+          {% assign brightness = section.settings.color_bg | color_brightness %}
+
+          {% if brightness <= 192 %}
+            {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+            background-color: {{ section.settings.color_bg | color_lighten: lightenAmount }};
+          {% else %}
+            {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+            background-color: {{ section.settings.color_bg | color_darken: darkenAmount }};
+          {% endif %}
+        }
+
+        .announcement-bar__message {
+          color: {{ section.settings.color_text }};
+        }
+      </style>
+
+      {% if section.settings.message_link == blank %}
+        <div class="announcement-bar">
+      {% else %}
+        <a href="{{ section.settings.message_link }}" class="announcement-bar announcement-bar--link">
+      {% endif %}
+
+        <p class="announcement-bar__message">{{ section.settings.message_text | escape }}</p>
+
+      {% if section.settings.message_link == blank %}
+        </div>
+      {% else %}
+        </a>
+      {% endif %}
+
+    {% endif %}
+  {% endif %}
+
+  <header class="site-header border-bottom logo--left" role="banner">
+    <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
+        {%- assign logo_classes = 'medium-up--one-third logo-align--left' -%}
+
+      <div class="grid__item {{ logo_classes }}">
+        {% comment %}
+          Use the uploaded logo from theme settings if enabled.
+          Site name gets precedence with H1 tag on homepage, div on other pages.
+        {% endcomment %}
+        
+        {% if section.settings.logo_svg != blank %}
+        <a href="{{ routes.root_url }}" class="site-header__logo-image">
+        <div class="custom-header-logo">
+          <span><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 4500 1200" style="enable-background:new 0 0 4500 1200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#231F20;}
+</style>
+<g>
+	<path d="M66.3,663.2h63.5v-521H66.3v-12.9h217.9v12.9h-63.5v246h215.5v-246h-63.5v-12.9h217.9v12.9H527v521h63.5v12.9H372.6v-12.9
+		h63.5V401.1H220.7v262.1h63.5v12.9H66.3V663.2z"/>
+	<path d="M843,660c-37.8,16.1-81.2,25.7-111.8,25.7c-50.7,0-90-26.5-90-78c0-57.9,48.2-86.8,94.9-99.7
+		c27.3-7.2,67.5-16.1,106.9-22.5V371.4c0-14.5-8-16.9-34.6-16.9c-18.5,0-41,1.6-63.5,8.8v76.4h-56.3c-12.9,0-16.1-2.4-16.1-18.5
+		c0-57.1,71.6-78.8,135.9-78.8c65.9,0,111,21.7,111,72.4v248.4h48.2v12.9H843V660z M736.9,672.1c26.5,0,70.8-10.5,106.1-25.7V498.4
+		c-37.8,6.4-78,15.3-105.3,22.5c-8,2.4-9.6,7.2-9.6,19.3v120.6C728,669.7,729.6,672.1,736.9,672.1z"/>
+	<path d="M1183.1,676.1H992.5v-12.9h49.8V367.3h-49.8v-12.9h71.6l54.7-8v42.6c53.9-35.4,79.6-38.6,99.7-38.6
+		c28.1,0,60.3,20.1,60.3,55.5c0,24.1-1.6,32.2-15.3,32.2h-54.7v-74c-29.7,4-46.6,12.9-90,39.4v259.7h64.3V676.1z"/>
+	<path d="M1441.9,676.1c-33,0-84.4-17.7-84.4-69.9V367.3h-57.1v-12.9h57.1v-83.6l37.8,4l38.6-12.9v92.5h75.6v12.9h-75.6v286.2
+		c0,8.8,1.6,9.6,9.6,9.6h74v12.9H1441.9z"/>
+	<path d="M1661.4,663.2h20.1l51.5-39.4l170.4-502.5h10.5L2106,663.2h41.8v12.9h-190.5v-12.9h51.5L1951.7,504h-163.2l-40.2,120.6
+		l51.5,38.6h27.3v12.9h-165.6V663.2z M1947.6,491.2l-74-214.7h-8l-72.4,214.7H1947.6z"/>
+	<path d="M2390.7,364.9c-16.9-6.4-33-8-49-8c-46.6,0-78.8,17.7-78.8,33.8v254.1c0,16.1,32.2,33.8,70.8,33.8
+		c41,0,93.3-24.9,112.6-97.3l12.1,4c-20.1,78.8-79.6,106.1-124.6,106.1c-79.6,0-158.4-69.9-158.4-173.7
+		c0-101.3,70.8-173.7,166.4-173.7c78,0,119,43.4,119,82c0,12.1-2.4,14.5-15.3,14.5h-54.7V364.9z"/>
+	<path d="M2736.4,364.9c-16.9-6.4-33-8-49-8c-46.6,0-78.8,17.7-78.8,33.8v254.1c0,16.1,32.2,33.8,70.8,33.8
+		c41,0,93.3-24.9,112.6-97.3l12.1,4c-20.1,78.8-79.6,106.1-124.6,106.1c-79.6,0-158.4-69.9-158.4-173.7
+		c0-101.3,70.8-173.7,166.4-173.7c78,0,119,43.4,119,82c0,12.1-2.4,14.5-15.3,14.5h-54.7V364.9z"/>
+	<path d="M2866.6,521.7c0-79.6,51.5-177.7,155.2-177.7c85.2,0,141.5,64.3,141.5,131.1c0,12.9-10.5,14.5-21.7,14.5h-187.3v151.2
+		c0,18.5,37,37,74,37c45,0,102.9-28.9,120.6-92.5l12.9,4c-20.1,71.6-85.2,101.3-133.5,101.3C2929.3,690.6,2866.6,594.1,2866.6,521.7
+		z M3081.3,476.7v-89.2c0-15.3-17.7-30.6-59.5-30.6c-37,0-67.5,15.3-67.5,30.6v89.2H3081.3z"/>
+	<path d="M3421.4,663.2h50.7V383.4c0-14.5-4.8-16.1-17.7-16.1c-15.3,0-65.1,5.6-120.6,21.7v274.2h50.7v12.9h-175.3v-12.9h48.2V367.3
+		h-48.2v-12.9h69.9l54.7-8v28.1c49.8-12.9,106.1-22.5,130.2-22.5c33,0,84.4,20.1,84.4,72.4v238.8h48.2v12.9h-175.3V663.2z"/>
+	<path d="M3763.1,676.1c-33,0-84.4-17.7-84.4-69.9V367.3h-57.1v-12.9h57.1v-83.6l37.8,4L3755,262v92.5h75.6v12.9H3755v286.2
+		c0,8.8,1.6,9.6,9.6,9.6h74v12.9H3763.1z"/>
+	<path d="M4054.9,371.4c-16.9-9.6-37.8-13.7-52.3-13.7c-35.4,0-62.7,16.9-62.7,31.4c0,2.4,0.8,4.8,4.8,8.8L4093.5,545
+		c15.3,14.5,21.7,32.2,21.7,49.8c0,45.8-38.6,96.5-106.1,96.5c-28.9,0-59.5-12.1-82-26.5l-33,11.3h-5.6V559.5h8l36.2,92.5
+		c21.7,14.5,49.8,26.5,76.4,26.5c42.6,0,65.9-26.5,65.9-37c0-2.4-0.8-4-3.2-7.2l-149.5-147.1c-14.5-14.5-21.7-31.4-21.7-49
+		c0-45.8,35.4-93.3,102.1-93.3c20.1,0,41,5.6,57.9,14.5l32.2-4.8h4.8l3.2,104.5h-8L4054.9,371.4z"/>
+</g>
+<g>
+	<path class="st0" d="M1732.8,927.2c-5.6-3.2-12.2-5.2-20.4-5.2c-15.6,0-25.4,10.6-25.4,12.6c0,0.6,0.2,1,1,2l63,74.2
+		c3.8,4.6,4.8,8.6,4.8,13.6c0,14-14,37-42.2,37c-11,0-20.4-3.6-27.6-8.2l-12,5h-2.4v-38.8h2.6l14.2,31.2c7,4.4,15,7.6,25.2,7.6
+		c17.6,0,30-11.8,30-17.2c0-1.6-0.4-3-2.4-5.4l-60.4-70c-4-4.8-5.4-9.4-5.4-14.2c0-16.6,17-32.6,37-32.6c6.2,0,14.4,1.2,22.2,5.6
+		l10.6-2.6h2.4l0.8,33.6h-2.6L1732.8,927.2z"/>
+	<path class="st0" d="M1802.6,983.2c12.4-3.2,26.2-5.6,32.4-5.6c8.2,0,21,5,21,18v59.4h12v3.2h-43.6v-3.2h12.6v-69.6
+		c0-3.6-1.2-4-4.4-4c-3.8,0-16.2,1.4-30,5.4v68.2h12.6v3.2h-43.6v-3.2h12V925.4h-12v-3.2h17.4l13.6-2V983.2z"/>
+	<path class="st0" d="M1918,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S1893.4,975.6,1918,975.6z
+		 M1899.2,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C1907.8,978.8,1899.2,984,1899.2,987.2z"/>
+	<path class="st0" d="M2014.6,1108.4h-45v-3.2h12V981.4h-12v-3.2h17.4l13.6-2v6.6c8-4.8,16-6.4,21.8-6.4c22.6,0,39,18,39,41.8
+		c0,24-16.4,42-39,42c-5.8,0-13.8-1.6-21.8-6.4v51.4h14V1108.4z M2000.6,986.4v63.8c7.2,4.8,15.8,6.8,21.8,6.8
+		c9.4,0,17.2-3.6,17.2-7.4V987c0-3.8-7.8-7.4-17.2-7.4C2016.4,979.6,2007.8,981.6,2000.6,986.4z"/>
+	<path class="st0" d="M2121.2,925.4h-15.8v-3.2h56.2v3.2h-17.8V1055h42.2l19-33.6h2.8l-3.8,36.8h-98.6v-3.2h15.8V925.4z"/>
+	<path class="st0" d="M2252.8,978.2v74c0,3.6,2,4.6,6,4.6c7.2,0,16.4-2,28.4-9.2v-66.2h-14v-3.2h33v76.8h12v3.2h-31v-7
+		c-12.2,7.2-21.4,9-28.4,9c-11,0-25-7-25-20v-58.8h-12v-3.2H2252.8z"/>
+	<path class="st0" d="M2352.6,1058.2h-29v-3.2h4.8l9.2-6.2l21-29.2l-22.6-38.2h-10.4v-3.2h43v3.2h-11l15.2,26h1.4l14-19.8l-5.8-6.2
+		h-5v-3.2h29.2v3.2h-4.8l-10,6.2l-16.6,23.6l25.6,43.8h9.6v3.2h-41.2v-3.2h10.4l-19-32h-1.4l-18.2,25.8l6.8,6.2h4.8V1058.2z"/>
+	<path class="st0" d="M2445.2,978.2v74c0,3.6,2,4.6,6,4.6c7.2,0,16.4-2,28.4-9.2v-66.2h-14v-3.2h33v76.8h12v3.2h-31v-7
+		c-12.2,7.2-21.4,9-28.4,9c-11,0-25-7-25-20v-58.8h-12v-3.2H2445.2z"/>
+	<path class="st0" d="M2565.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H2572v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M2638,1066.4l-37.2-85h-8.4v-3.2h39.6v3.2h-9.6l23.2,56h1.8l16.4-51.2l-9-4.8h-5v-3.2h28.6v3.2h-4.2l-6.8,4.8
+		l-34.6,107.6c-3.4,10.6-9.6,14.6-18.4,14.6h-1c-3.8,0-4.2-0.4-4.2-3.8V1093h16.6c2.2,0,3.8-0.4,4.4-2.4L2638,1066.4z"/>
+	<path class="st0" d="M2716,1055h15.8V925.4H2716v-3.2h64.4c36.6,0,57.8,33.6,57.8,68c0,34.2-21.2,68-57.8,68H2716V1055z
+		 M2780.4,1055c18.2,0,32.6-10,32.6-17.6V943c0-7.6-14.4-17.6-32.6-17.6h-26V1055H2780.4z"/>
+	<path class="st0" d="M2855.4,1019.8c0-19.8,12.8-44.2,38.6-44.2c21.2,0,35.2,16,35.2,32.6c0,3.2-2.6,3.6-5.4,3.6h-46.6v37.6
+		c0,4.6,9.2,9.2,18.4,9.2c11.2,0,25.6-7.2,30-23l3.2,1c-5,17.8-21.2,25.2-33.2,25.2C2871,1061.8,2855.4,1037.8,2855.4,1019.8z
+		 M2908.8,1008.6v-22.2c0-3.8-4.4-7.6-14.8-7.6c-9.2,0-16.8,3.8-16.8,7.6v22.2H2908.8z"/>
+	<path class="st0" d="M2997.8,980.8c-4.2-1.6-8.2-2-12.2-2c-11.6,0-19.6,4.4-19.6,8.4v63.2c0,4,8,8.4,17.6,8.4
+		c10.2,0,23.2-6.2,28-24.2l3,1c-5,19.6-19.8,26.4-31,26.4c-19.8,0-39.4-17.4-39.4-43.2c0-25.2,17.6-43.2,41.4-43.2
+		c19.4,0,29.6,10.8,29.6,20.4c0,3-0.6,3.6-3.8,3.6h-13.6V980.8z"/>
+	<path class="st0" d="M3070.8,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S3046.2,975.6,3070.8,975.6
+		z M3052,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C3060.6,978.8,3052,984,3052,987.2z"/>
+	<path class="st0" d="M3169.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H3176v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M3232.8,1055h15.8V925.4h-15.8v-3.2h99l1.4,34.2h-2.8l-16.4-31h-42.8v63h23L3305,968h2.8l0.4,44.4h-2.8
+		l-11.2-20.8h-23v63.4h45.4l18.8-33.6h2.8l-3.6,36.8h-101.8V1055z"/>
+	<path class="st0" d="M3369.2,981.4h-14.4v-3.2h14.4v-9c0-30,16.4-47.8,38.8-47.8c9.4,0,20.4,4,23.4,11.6c5.8-8.8,14-13.6,23.4-13.6
+		c9.4,0,20.6,5.4,20.6,16c0,2.8-0.4,3.2-3.8,3.2H3458v-15.8c-1-0.2-2-0.2-3.2-0.2c-8.6,0-13.4,4.8-13.4,9.4v46.2h18.4v3.2h-18.4
+		v73.6h15.4v3.2H3408v-3.2h14.4v-73.6h-34.2v73.6h12v3.2h-45.4v-3.2h14.4V981.4z M3388.2,978.2h34.2v-9c0-11.2,1.8-21,5-28.6h-12.6
+		v-15.2c-2.2-0.6-4.4-0.8-6.8-0.8c-12.2,0-19.8,6-19.8,11.6V978.2z"/>
+	<path class="st0" d="M3512.8,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S3488.2,975.6,3512.8,975.6
+		z M3494,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C3502.6,978.8,3494,984,3494,987.2z"/>
+	<path class="st0" d="M3611.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H3618v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M3676,1058.2c-8.2,0-21-4.4-21-17.4v-59.4h-14.2v-3.2h14.2v-20.8l9.4,1l9.6-3.2v23h18.8v3.2H3674v71.2
+		c0,2.2,0.4,2.4,2.4,2.4h18.4v3.2H3676z"/>
+	<path class="st0" d="M3714.8,925.4h-12.4v-3.2h17.8l13.6-2V1055h12v3.2h-43.4v-3.2h12.4V925.4z"/>
+	<path class="st0" d="M3757.2,1019.8c0-19.8,12.8-44.2,38.6-44.2c21.2,0,35.2,16,35.2,32.6c0,3.2-2.6,3.6-5.4,3.6H3779v37.6
+		c0,4.6,9.2,9.2,18.4,9.2c11.2,0,25.6-7.2,30-23l3.2,1c-5,17.8-21.2,25.2-33.2,25.2C3772.8,1061.8,3757.2,1037.8,3757.2,1019.8z
+		 M3810.6,1008.6v-22.2c0-3.8-4.4-7.6-14.8-7.6c-9.2,0-16.8,3.8-16.8,7.6v22.2H3810.6z"/>
+	<path class="st0" d="M3888.2,982.4c-4.2-2.4-9.4-3.4-13-3.4c-8.8,0-15.6,4.2-15.6,7.8c0,0.6,0.2,1.2,1.2,2.2l37,36.6
+		c3.8,3.6,5.4,8,5.4,12.4c0,11.4-9.6,24-26.4,24c-7.2,0-14.8-3-20.4-6.6l-8.2,2.8h-1.4v-29h2l9,23c5.4,3.6,12.4,6.6,19,6.6
+		c10.6,0,16.4-6.6,16.4-9.2c0-0.6-0.2-1-0.8-1.8l-37.2-36.6c-3.6-3.6-5.4-7.8-5.4-12.2c0-11.4,8.8-23.2,25.4-23.2
+		c5,0,10.2,1.4,14.4,3.6l8-1.2h1.2l0.8,26h-2L3888.2,982.4z"/>
+	<path class="st0" d="M3962.6,982.4c-4.2-2.4-9.4-3.4-13-3.4c-8.8,0-15.6,4.2-15.6,7.8c0,0.6,0.2,1.2,1.2,2.2l37,36.6
+		c3.8,3.6,5.4,8,5.4,12.4c0,11.4-9.6,24-26.4,24c-7.2,0-14.8-3-20.4-6.6l-8.2,2.8h-1.4v-29h2l9,23c5.4,3.6,12.4,6.6,19,6.6
+		c10.6,0,16.4-6.6,16.4-9.2c0-0.6-0.2-1-0.8-1.8l-37.2-36.6c-3.6-3.6-5.4-7.8-5.4-12.2c0-11.4,8.8-23.2,25.4-23.2
+		c5,0,10.2,1.4,14.4,3.6l8-1.2h1.2l0.8,26h-2L3962.6,982.4z"/>
+	<path class="st0" d="M4003.2,925.4h-12.4v-3.2h17.8l13.6-2V1055h12v3.2h-43.4v-3.2h12.4V925.4z"/>
+	<path class="st0" d="M4083,1066.4l-37.2-85h-8.4v-3.2h39.6v3.2h-9.6l23.2,56h1.8l16.4-51.2l-9-4.8h-5v-3.2h28.6v3.2h-4.2l-6.8,4.8
+		l-34.6,107.6c-3.4,10.6-9.6,14.6-18.4,14.6h-1c-3.8,0-4.2-0.4-4.2-3.8V1093h16.6c2.2,0,3.8-0.4,4.4-2.4L4083,1066.4z"/>
+</g>
+</svg></span>
+        </div>
+        </a>
+        {% else %}
+        {% if template.name == 'index' %}
+          <h1 class="h2 site-header__logo">
+        {% else %}
+          <div class="h2 site-header__logo">
+        {% endif %}
+          {% if section.settings.logo %}
+            {%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <a href="{{ routes.root_url }}" class="site-header__logo-image">
+              {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 4500 1200" style="enable-background:new 0 0 4500 1200;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#231F20;}
+</style>
+<g>
+	<path d="M66.3,663.2h63.5v-521H66.3v-12.9h217.9v12.9h-63.5v246h215.5v-246h-63.5v-12.9h217.9v12.9H527v521h63.5v12.9H372.6v-12.9
+		h63.5V401.1H220.7v262.1h63.5v12.9H66.3V663.2z"/>
+	<path d="M843,660c-37.8,16.1-81.2,25.7-111.8,25.7c-50.7,0-90-26.5-90-78c0-57.9,48.2-86.8,94.9-99.7
+		c27.3-7.2,67.5-16.1,106.9-22.5V371.4c0-14.5-8-16.9-34.6-16.9c-18.5,0-41,1.6-63.5,8.8v76.4h-56.3c-12.9,0-16.1-2.4-16.1-18.5
+		c0-57.1,71.6-78.8,135.9-78.8c65.9,0,111,21.7,111,72.4v248.4h48.2v12.9H843V660z M736.9,672.1c26.5,0,70.8-10.5,106.1-25.7V498.4
+		c-37.8,6.4-78,15.3-105.3,22.5c-8,2.4-9.6,7.2-9.6,19.3v120.6C728,669.7,729.6,672.1,736.9,672.1z"/>
+	<path d="M1183.1,676.1H992.5v-12.9h49.8V367.3h-49.8v-12.9h71.6l54.7-8v42.6c53.9-35.4,79.6-38.6,99.7-38.6
+		c28.1,0,60.3,20.1,60.3,55.5c0,24.1-1.6,32.2-15.3,32.2h-54.7v-74c-29.7,4-46.6,12.9-90,39.4v259.7h64.3V676.1z"/>
+	<path d="M1441.9,676.1c-33,0-84.4-17.7-84.4-69.9V367.3h-57.1v-12.9h57.1v-83.6l37.8,4l38.6-12.9v92.5h75.6v12.9h-75.6v286.2
+		c0,8.8,1.6,9.6,9.6,9.6h74v12.9H1441.9z"/>
+	<path d="M1661.4,663.2h20.1l51.5-39.4l170.4-502.5h10.5L2106,663.2h41.8v12.9h-190.5v-12.9h51.5L1951.7,504h-163.2l-40.2,120.6
+		l51.5,38.6h27.3v12.9h-165.6V663.2z M1947.6,491.2l-74-214.7h-8l-72.4,214.7H1947.6z"/>
+	<path d="M2390.7,364.9c-16.9-6.4-33-8-49-8c-46.6,0-78.8,17.7-78.8,33.8v254.1c0,16.1,32.2,33.8,70.8,33.8
+		c41,0,93.3-24.9,112.6-97.3l12.1,4c-20.1,78.8-79.6,106.1-124.6,106.1c-79.6,0-158.4-69.9-158.4-173.7
+		c0-101.3,70.8-173.7,166.4-173.7c78,0,119,43.4,119,82c0,12.1-2.4,14.5-15.3,14.5h-54.7V364.9z"/>
+	<path d="M2736.4,364.9c-16.9-6.4-33-8-49-8c-46.6,0-78.8,17.7-78.8,33.8v254.1c0,16.1,32.2,33.8,70.8,33.8
+		c41,0,93.3-24.9,112.6-97.3l12.1,4c-20.1,78.8-79.6,106.1-124.6,106.1c-79.6,0-158.4-69.9-158.4-173.7
+		c0-101.3,70.8-173.7,166.4-173.7c78,0,119,43.4,119,82c0,12.1-2.4,14.5-15.3,14.5h-54.7V364.9z"/>
+	<path d="M2866.6,521.7c0-79.6,51.5-177.7,155.2-177.7c85.2,0,141.5,64.3,141.5,131.1c0,12.9-10.5,14.5-21.7,14.5h-187.3v151.2
+		c0,18.5,37,37,74,37c45,0,102.9-28.9,120.6-92.5l12.9,4c-20.1,71.6-85.2,101.3-133.5,101.3C2929.3,690.6,2866.6,594.1,2866.6,521.7
+		z M3081.3,476.7v-89.2c0-15.3-17.7-30.6-59.5-30.6c-37,0-67.5,15.3-67.5,30.6v89.2H3081.3z"/>
+	<path d="M3421.4,663.2h50.7V383.4c0-14.5-4.8-16.1-17.7-16.1c-15.3,0-65.1,5.6-120.6,21.7v274.2h50.7v12.9h-175.3v-12.9h48.2V367.3
+		h-48.2v-12.9h69.9l54.7-8v28.1c49.8-12.9,106.1-22.5,130.2-22.5c33,0,84.4,20.1,84.4,72.4v238.8h48.2v12.9h-175.3V663.2z"/>
+	<path d="M3763.1,676.1c-33,0-84.4-17.7-84.4-69.9V367.3h-57.1v-12.9h57.1v-83.6l37.8,4L3755,262v92.5h75.6v12.9H3755v286.2
+		c0,8.8,1.6,9.6,9.6,9.6h74v12.9H3763.1z"/>
+	<path d="M4054.9,371.4c-16.9-9.6-37.8-13.7-52.3-13.7c-35.4,0-62.7,16.9-62.7,31.4c0,2.4,0.8,4.8,4.8,8.8L4093.5,545
+		c15.3,14.5,21.7,32.2,21.7,49.8c0,45.8-38.6,96.5-106.1,96.5c-28.9,0-59.5-12.1-82-26.5l-33,11.3h-5.6V559.5h8l36.2,92.5
+		c21.7,14.5,49.8,26.5,76.4,26.5c42.6,0,65.9-26.5,65.9-37c0-2.4-0.8-4-3.2-7.2l-149.5-147.1c-14.5-14.5-21.7-31.4-21.7-49
+		c0-45.8,35.4-93.3,102.1-93.3c20.1,0,41,5.6,57.9,14.5l32.2-4.8h4.8l3.2,104.5h-8L4054.9,371.4z"/>
+</g>
+<g>
+	<path class="st0" d="M1732.8,927.2c-5.6-3.2-12.2-5.2-20.4-5.2c-15.6,0-25.4,10.6-25.4,12.6c0,0.6,0.2,1,1,2l63,74.2
+		c3.8,4.6,4.8,8.6,4.8,13.6c0,14-14,37-42.2,37c-11,0-20.4-3.6-27.6-8.2l-12,5h-2.4v-38.8h2.6l14.2,31.2c7,4.4,15,7.6,25.2,7.6
+		c17.6,0,30-11.8,30-17.2c0-1.6-0.4-3-2.4-5.4l-60.4-70c-4-4.8-5.4-9.4-5.4-14.2c0-16.6,17-32.6,37-32.6c6.2,0,14.4,1.2,22.2,5.6
+		l10.6-2.6h2.4l0.8,33.6h-2.6L1732.8,927.2z"/>
+	<path class="st0" d="M1802.6,983.2c12.4-3.2,26.2-5.6,32.4-5.6c8.2,0,21,5,21,18v59.4h12v3.2h-43.6v-3.2h12.6v-69.6
+		c0-3.6-1.2-4-4.4-4c-3.8,0-16.2,1.4-30,5.4v68.2h12.6v3.2h-43.6v-3.2h12V925.4h-12v-3.2h17.4l13.6-2V983.2z"/>
+	<path class="st0" d="M1918,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S1893.4,975.6,1918,975.6z
+		 M1899.2,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C1907.8,978.8,1899.2,984,1899.2,987.2z"/>
+	<path class="st0" d="M2014.6,1108.4h-45v-3.2h12V981.4h-12v-3.2h17.4l13.6-2v6.6c8-4.8,16-6.4,21.8-6.4c22.6,0,39,18,39,41.8
+		c0,24-16.4,42-39,42c-5.8,0-13.8-1.6-21.8-6.4v51.4h14V1108.4z M2000.6,986.4v63.8c7.2,4.8,15.8,6.8,21.8,6.8
+		c9.4,0,17.2-3.6,17.2-7.4V987c0-3.8-7.8-7.4-17.2-7.4C2016.4,979.6,2007.8,981.6,2000.6,986.4z"/>
+	<path class="st0" d="M2121.2,925.4h-15.8v-3.2h56.2v3.2h-17.8V1055h42.2l19-33.6h2.8l-3.8,36.8h-98.6v-3.2h15.8V925.4z"/>
+	<path class="st0" d="M2252.8,978.2v74c0,3.6,2,4.6,6,4.6c7.2,0,16.4-2,28.4-9.2v-66.2h-14v-3.2h33v76.8h12v3.2h-31v-7
+		c-12.2,7.2-21.4,9-28.4,9c-11,0-25-7-25-20v-58.8h-12v-3.2H2252.8z"/>
+	<path class="st0" d="M2352.6,1058.2h-29v-3.2h4.8l9.2-6.2l21-29.2l-22.6-38.2h-10.4v-3.2h43v3.2h-11l15.2,26h1.4l14-19.8l-5.8-6.2
+		h-5v-3.2h29.2v3.2h-4.8l-10,6.2l-16.6,23.6l25.6,43.8h9.6v3.2h-41.2v-3.2h10.4l-19-32h-1.4l-18.2,25.8l6.8,6.2h4.8V1058.2z"/>
+	<path class="st0" d="M2445.2,978.2v74c0,3.6,2,4.6,6,4.6c7.2,0,16.4-2,28.4-9.2v-66.2h-14v-3.2h33v76.8h12v3.2h-31v-7
+		c-12.2,7.2-21.4,9-28.4,9c-11,0-25-7-25-20v-58.8h-12v-3.2H2445.2z"/>
+	<path class="st0" d="M2565.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H2572v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M2638,1066.4l-37.2-85h-8.4v-3.2h39.6v3.2h-9.6l23.2,56h1.8l16.4-51.2l-9-4.8h-5v-3.2h28.6v3.2h-4.2l-6.8,4.8
+		l-34.6,107.6c-3.4,10.6-9.6,14.6-18.4,14.6h-1c-3.8,0-4.2-0.4-4.2-3.8V1093h16.6c2.2,0,3.8-0.4,4.4-2.4L2638,1066.4z"/>
+	<path class="st0" d="M2716,1055h15.8V925.4H2716v-3.2h64.4c36.6,0,57.8,33.6,57.8,68c0,34.2-21.2,68-57.8,68H2716V1055z
+		 M2780.4,1055c18.2,0,32.6-10,32.6-17.6V943c0-7.6-14.4-17.6-32.6-17.6h-26V1055H2780.4z"/>
+	<path class="st0" d="M2855.4,1019.8c0-19.8,12.8-44.2,38.6-44.2c21.2,0,35.2,16,35.2,32.6c0,3.2-2.6,3.6-5.4,3.6h-46.6v37.6
+		c0,4.6,9.2,9.2,18.4,9.2c11.2,0,25.6-7.2,30-23l3.2,1c-5,17.8-21.2,25.2-33.2,25.2C2871,1061.8,2855.4,1037.8,2855.4,1019.8z
+		 M2908.8,1008.6v-22.2c0-3.8-4.4-7.6-14.8-7.6c-9.2,0-16.8,3.8-16.8,7.6v22.2H2908.8z"/>
+	<path class="st0" d="M2997.8,980.8c-4.2-1.6-8.2-2-12.2-2c-11.6,0-19.6,4.4-19.6,8.4v63.2c0,4,8,8.4,17.6,8.4
+		c10.2,0,23.2-6.2,28-24.2l3,1c-5,19.6-19.8,26.4-31,26.4c-19.8,0-39.4-17.4-39.4-43.2c0-25.2,17.6-43.2,41.4-43.2
+		c19.4,0,29.6,10.8,29.6,20.4c0,3-0.6,3.6-3.8,3.6h-13.6V980.8z"/>
+	<path class="st0" d="M3070.8,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S3046.2,975.6,3070.8,975.6
+		z M3052,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C3060.6,978.8,3052,984,3052,987.2z"/>
+	<path class="st0" d="M3169.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H3176v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M3232.8,1055h15.8V925.4h-15.8v-3.2h99l1.4,34.2h-2.8l-16.4-31h-42.8v63h23L3305,968h2.8l0.4,44.4h-2.8
+		l-11.2-20.8h-23v63.4h45.4l18.8-33.6h2.8l-3.6,36.8h-101.8V1055z"/>
+	<path class="st0" d="M3369.2,981.4h-14.4v-3.2h14.4v-9c0-30,16.4-47.8,38.8-47.8c9.4,0,20.4,4,23.4,11.6c5.8-8.8,14-13.6,23.4-13.6
+		c9.4,0,20.6,5.4,20.6,16c0,2.8-0.4,3.2-3.8,3.2H3458v-15.8c-1-0.2-2-0.2-3.2-0.2c-8.6,0-13.4,4.8-13.4,9.4v46.2h18.4v3.2h-18.4
+		v73.6h15.4v3.2H3408v-3.2h14.4v-73.6h-34.2v73.6h12v3.2h-45.4v-3.2h14.4V981.4z M3388.2,978.2h34.2v-9c0-11.2,1.8-21,5-28.6h-12.6
+		v-15.2c-2.2-0.6-4.4-0.8-6.8-0.8c-12.2,0-19.8,6-19.8,11.6V978.2z"/>
+	<path class="st0" d="M3512.8,975.6c24.6,0,40.6,22.6,40.6,43.2s-16,43.2-40.6,43.2s-40.6-22.6-40.6-43.2S3488.2,975.6,3512.8,975.6
+		z M3494,987.2v63.2c0,3.2,8.6,8.4,18.8,8.4c10.2,0,18.8-5.2,18.8-8.4v-63.2c0-3.2-8.6-8.4-18.8-8.4
+		C3502.6,978.8,3494,984,3494,987.2z"/>
+	<path class="st0" d="M3611.6,1058.2h-47.4v-3.2h12.4v-73.6h-12.4v-3.2h17.8l13.6-2v10.6c13.4-8.8,19.8-9.6,24.8-9.6
+		c7,0,15,5,15,13.8c0,6-0.4,8-3.8,8H3618v-18.4c-7.4,1-11.6,3.2-22.4,9.8v64.6h16V1058.2z"/>
+	<path class="st0" d="M3676,1058.2c-8.2,0-21-4.4-21-17.4v-59.4h-14.2v-3.2h14.2v-20.8l9.4,1l9.6-3.2v23h18.8v3.2H3674v71.2
+		c0,2.2,0.4,2.4,2.4,2.4h18.4v3.2H3676z"/>
+	<path class="st0" d="M3714.8,925.4h-12.4v-3.2h17.8l13.6-2V1055h12v3.2h-43.4v-3.2h12.4V925.4z"/>
+	<path class="st0" d="M3757.2,1019.8c0-19.8,12.8-44.2,38.6-44.2c21.2,0,35.2,16,35.2,32.6c0,3.2-2.6,3.6-5.4,3.6H3779v37.6
+		c0,4.6,9.2,9.2,18.4,9.2c11.2,0,25.6-7.2,30-23l3.2,1c-5,17.8-21.2,25.2-33.2,25.2C3772.8,1061.8,3757.2,1037.8,3757.2,1019.8z
+		 M3810.6,1008.6v-22.2c0-3.8-4.4-7.6-14.8-7.6c-9.2,0-16.8,3.8-16.8,7.6v22.2H3810.6z"/>
+	<path class="st0" d="M3888.2,982.4c-4.2-2.4-9.4-3.4-13-3.4c-8.8,0-15.6,4.2-15.6,7.8c0,0.6,0.2,1.2,1.2,2.2l37,36.6
+		c3.8,3.6,5.4,8,5.4,12.4c0,11.4-9.6,24-26.4,24c-7.2,0-14.8-3-20.4-6.6l-8.2,2.8h-1.4v-29h2l9,23c5.4,3.6,12.4,6.6,19,6.6
+		c10.6,0,16.4-6.6,16.4-9.2c0-0.6-0.2-1-0.8-1.8l-37.2-36.6c-3.6-3.6-5.4-7.8-5.4-12.2c0-11.4,8.8-23.2,25.4-23.2
+		c5,0,10.2,1.4,14.4,3.6l8-1.2h1.2l0.8,26h-2L3888.2,982.4z"/>
+	<path class="st0" d="M3962.6,982.4c-4.2-2.4-9.4-3.4-13-3.4c-8.8,0-15.6,4.2-15.6,7.8c0,0.6,0.2,1.2,1.2,2.2l37,36.6
+		c3.8,3.6,5.4,8,5.4,12.4c0,11.4-9.6,24-26.4,24c-7.2,0-14.8-3-20.4-6.6l-8.2,2.8h-1.4v-29h2l9,23c5.4,3.6,12.4,6.6,19,6.6
+		c10.6,0,16.4-6.6,16.4-9.2c0-0.6-0.2-1-0.8-1.8l-37.2-36.6c-3.6-3.6-5.4-7.8-5.4-12.2c0-11.4,8.8-23.2,25.4-23.2
+		c5,0,10.2,1.4,14.4,3.6l8-1.2h1.2l0.8,26h-2L3962.6,982.4z"/>
+	<path class="st0" d="M4003.2,925.4h-12.4v-3.2h17.8l13.6-2V1055h12v3.2h-43.4v-3.2h12.4V925.4z"/>
+	<path class="st0" d="M4083,1066.4l-37.2-85h-8.4v-3.2h39.6v3.2h-9.6l23.2,56h1.8l16.4-51.2l-9-4.8h-5v-3.2h28.6v3.2h-4.2l-6.8,4.8
+		l-34.6,107.6c-3.4,10.6-9.6,14.6-18.4,14.6h-1c-3.8,0-4.2-0.4-4.2-3.8V1093h16.6c2.2,0,3.8-0.4,4.4-2.4L4083,1066.4z"/>
+</g>
+</svg>
+            </a>
+          {% else %}
+            <a class="site-header__logo-link" href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {% endif %}
+        {% if template.name == 'index' %}
+          </h1>
+        {% else %}
+          </div>
+        {% endif %}
+        {% endif %}
+       
+      </div>
+      
+        <div class="grid__item small--hide medium-up--two-thirds text-right">
+               {% include 'header-info'%}   
+      </div>
+      
+    </div>
+    <div class="grid grid--no-gutters grid--table">
+        <nav class="grid__item medium-up--five-sixths small--hide" id="AccessibleNav" role="navigation">
+          {% include 'site-nav' %}
+        </nav>
+
+
+      <div class="grid__item medium-up--one-sixth text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+        <div class="site-header__icons-wrapper">
+          
+          {% comment %}
+          
+          <div class="site-header__search site-header__icon">
+            {% include 'search-form' %}
+          </div>
+
+          <button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span> 
+          </button>
+          
+		  {% endcomment %}
+          
+          {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="{{ routes.account_url }}" class="site-header__icon site-header__account"> 
+                {% include 'icon-login' %}
+                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span> 
+              </a>
+            {% else %}
+              <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account">
+                {% include 'icon-login' %}
+                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+              </a>
+            {% endif %}
+          {% endif %}
+
+          <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart">
+            {% include 'icon-cart' %}
+            <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+              <span data-cart-count>{{ cart.item_count }}</span>
+              <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+            </div>
+          </a>
+
+          {% if shop.enabled_currencies.size > 1 %}  
+            {% form 'currency', class: "currency-selector small--hide" %}
+              <label for="CurrencySelector" class="visually-hidden">{{ 'general.currency.dropdown_label' | t }}</label>
+              <div class="currency-selector__input-wrapper select-group">
+                <select name="currency" id="CurrencySelector" class="currency-selector__dropdown" aria-describedby="a11y-refresh-page-message a11y-selection-message" data-currency-selector>
+                  {% for currency in shop.enabled_currencies %}
+                    <option value="{{currency.iso_code}}"{% if currency == cart.currency %} selected="true"{% endif %}>{{currency.iso_code}}</option>
+                  {% endfor %}
+                </select>
+                {% include 'icon-chevron-down' %}
+              </div>
+            {% endform %}
+          {% endif %}
+
+          {% unless linklists[section.settings.main_linklist] == blank %}
+            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
+              {% include 'icon-hamburger' %}
+              {% include 'icon-close' %} 
+            </button>
+          {% endunless %}
+        </div>
+
+      </div>
+    </div>
+    <div class="page-width medium-up--hide mobile-header-search-form">
+      <form action="/search" method="get" role="search" class="search">
+        <div class="input-group">
+          <input type="search" class="input-group__field search__input boost-pfs-search-box ui-autocomplete-input" name="q" value="" placeholder="Search" aria-label="Search" autofocus="" id="boost-pfs-search-box-2" data-search-box="boost-pfs-search-box-2" aria-live="assertive" role="search" autocomplete="off">
+          <input type="search" id="SearchInput" aria-describedby="error-search-form" aria-invalid="true">
+          <span class="input-group__btn">
+            <button class="btn search__submit" type="submit">Search</button>
+          </span>
+        </div>
+      </form> 
+    </div>
+  </header>
+  
+  <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
+    <ul id="MobileNav" class="mobile-nav">
+      {% for link in linklists[section.settings.main_linklist].links %}
+      {%- assign outerLoopIndex = forloop.index -%}
+
+      <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}"> 
+        {% if link.links != blank %}
+        {% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
+        <button type="button" class="btn--link js-toggle-submenu mobile-nav__link{% if link.child_active %} mobile-nav__link--active{% endif %}" data-target="{{ child_list_handle }}" data-level="1" aria-expanded="false">
+          <span class="mobile-nav__label">{{ link.title | escape }}</span>
+          <div class="mobile-nav__icon">
+            {% include 'icon-chevron-right' %}
+          </div>
+        </button>
+        <ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
+          <li class="visually-hidden" tabindex="-1" data-menu-title="2">
+            {{- link.title }} {{ 'layout.navigation.menu' | t -}}
+          </li>
+          <li class="mobile-nav__item border-bottom">
+            <div class="mobile-nav__table">
+              <div class="mobile-nav__table-cell mobile-nav__return">
+                <button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button" aria-expanded="true" aria-label="{{ link.title }}">
+                  {% include 'icon-chevron-left' %}
+                </button>
+              </div>
+              <span class="mobile-nav__sublist-link mobile-nav__sublist-header mobile-nav__sublist-header--main-nav-parent">
+                <span class="mobile-nav__label">{{ link.title | escape }}</span>
+              </span>
+            </div>
+          </li>
+
+          {% for childlink in link.links %}
+          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+            {% if childlink.links != blank %}
+            {% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{% endcapture %}
+            <button type="button" class="btn--link js-toggle-submenu mobile-nav__link mobile-nav__sublist-link" data-target="{{ grandchild_list_handle }}" aria-expanded="false">
+              <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+              <div class="mobile-nav__icon">
+                {% include 'icon-chevron-right' %}
+              </div>
+            </button>
+            <ul class="mobile-nav__dropdown" data-parent="{{ grandchild_list_handle }}" data-level="3">
+              <li class="visually-hidden" tabindex="-1" data-menu-title="3">
+                {{- childlink.title }} {{ 'layout.navigation.menu' | t -}}
+              </li>
+              <li class="mobile-nav__item border-bottom">
+                <div class="mobile-nav__table">
+                  <div class="mobile-nav__table-cell mobile-nav__return">
+                    <button type="button" class="btn--link js-toggle-submenu mobile-nav__return-btn" data-target="{{ child_list_handle }}" aria-expanded="true" aria-label="{{ childlink.title }}">
+                      {% include 'icon-chevron-left' %}
+                    </button>
+                  </div>
+                  <a href="{{ childlink.url }}"
+                     class="mobile-nav__sublist-link mobile-nav__sublist-header"
+                     {% if childlink.current %} aria-current="page"{% endif %}
+                     >
+                    <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+                  </a>
+                </div>
+              </li>
+              {% for grandchildlink in childlink.links %}
+              <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+                <a href="{{ grandchildlink.url }}"
+                   class="mobile-nav__sublist-link"
+                   {% if grandchildlink.current %} aria-current="page"{% endif %}
+                   >
+                  <span class="mobile-nav__label">{{ grandchildlink.title | escape }}</span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <a href="{{ childlink.url }}"
+               class="mobile-nav__sublist-link"
+               {% if childlink.current %} aria-current="page"{% endif %}
+               >
+              <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+            </a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <a href="{{ link.url }}"
+           class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}"
+           {% if link.current %} aria-current="page"{% endif %}
+           >
+          <span class="mobile-nav__label">{{ link.title | escape }}</span>
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
+      {% if shop.enabled_currencies.size > 1 %}
+      <li class="mobile-nav__item border-top">
+        {% form 'currency', class: "currency-selector" %}
+        <label for="CurrencySelectorMobile" class="currency-selector__label">{{ 'general.currency.dropdown_label' | t }}</label>
+        <div class="currency-selector__input-wrapper select-group">
+          <select name="currency" id="CurrencySelectorMobile" class="currency-selector__dropdown" aria-describedby="a11y-refresh-page-message a11y-selection-message" data-currency-selector>
+            {% for currency in shop.enabled_currencies %}
+            <option value="{{currency.iso_code}}"{% if currency == cart.currency %} selected="true"{% endif %}>{{currency.iso_code}}</option>
+            {% endfor %}
+          </select>
+          {% include 'icon-chevron-down' %}
+        </div>
+        {% endform %}
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
+  ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+</script>
+
+{% if template.name == 'index' %}
+  {% assign potential_action_target = shop.url | append: "{{ routes.search_url }}?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": {
+    "da": "Overskrift",
+    "de": "Titel",
+    "en": "Header",
+    "es": "Encabezado",
+    "fi": "Ylätunniste",
+    "fr": "En-tête",
+    "hi": "हैडर",
+    "it": "Header",
+    "ja": "ヘッダー",
+    "ko": "머리글",
+    "ms": "Pengepala",
+    "nb": "Header",
+    "nl": "Koptekst",
+    "pt-BR": "Cabeçalho",
+    "pt-PT": "Cabeçalho",
+    "sv": "Rubrik",
+    "th": "ส่วนหัว",
+    "zh-CN": "标头",
+    "zh-TW": "標頭"
+  },
+  "settings": [
+	{
+		"type":"html",
+		"id":"logo_svg",
+		"label":"SVG logo"
+	},
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "da": "Logobillede",
+        "de": "Logo-Foto",
+        "en": "Logo image",
+        "es": "Logotipo",
+        "fi": "Logokuva",
+        "fr": "Image du logo",
+        "hi": "लोगो इमेज",
+        "it": "Immagine del logo",
+        "ja": "ロゴ画像",
+        "ko": "로고 이미지",
+        "ms": "Imej logo",
+        "nb": "Logobilde",
+        "nl": "Afbeelding van logo",
+        "pt-BR": "Imagem do logotipo",
+        "pt-PT": "Imagem do logótipo",
+        "sv": "Logobild",
+        "th": "รูปภาพโลโก้",
+        "zh-CN": "logo 图片",
+        "zh-TW": "標誌圖片"
+      }
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": {
+        "da": "Brugerdefineret logobredde",
+        "de": "Logobreite",
+        "en": "Custom logo width",
+        "es": "Ancho del logotipo personalizado",
+        "fi": "Mukautetun logon leveys",
+        "fr": "Largeur personnalisée du logo",
+        "hi": "कस्टम लोगो की चौड़ाई",
+        "it": "Larghezza logo personalizzato",
+        "ja": "ロゴの幅をカスタムする",
+        "ko": "사용자 지정 로고 폭",
+        "ms": "Lebar logo tersuai",
+        "nb": "Tilpasset logobredde",
+        "nl": "Aangepaste logo-breedte",
+        "pt-BR": "Largura do logotipo personalizado",
+        "pt-PT": "Largura do logótipo personalizado",
+        "sv": "Anpassad logotypsbredd",
+        "th": "ความกว้างของโลโก้แบบกำหนดเอง",
+        "zh-CN": "自定义 logo 宽度",
+        "zh-TW": "自訂商標寬度"
+      },
+      "min": 50,
+      "max": 350,
+      "step": 5,
+      "unit": {
+        "da": "px",
+        "de": "px",
+        "en": "px",
+        "es": "px",
+        "fi": "px",
+        "fr": "px",
+        "hi": "px",
+        "it": "px",
+        "ja": "px",
+        "ko": "px",
+        "ms": "px",
+        "nb": "px",
+        "nl": "px",
+        "pt-BR": "px",
+        "pt-PT": "px",
+        "sv": "px",
+        "th": "px",
+        "zh-CN": "px",
+        "zh-TW": "像素"
+      },
+      "default": 100
+    },
+      {
+        "type": "text",
+        "id": "contact_text",
+        "label": "Contact Text",
+        "default": "Got a Question? Call Us"
+      },
+ 	{
+        "type": "text",
+        "id": "phone_text",
+        "label": "Phone Number",
+        "default": "Add Phone Number"
+      },
+      {
+        "type": "text",
+        "id": "hours_text",
+        "label": "Hours of Operation",
+        "default": "Mon-Sat 9am-6pm Eastern"
+      },
+    {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": {
+        "da": "Menu",
+        "de": "Menü",
+        "en": "Menu",
+        "es": "Menú",
+        "fi": "Valikko",
+        "fr": "Menu",
+        "hi": "मेनू",
+        "it": "Menu",
+        "ja": "メニュー",
+        "ko": "메뉴",
+        "ms": "Menu",
+        "nb": "Meny",
+        "nl": "Menu",
+        "pt-BR": "Menu",
+        "pt-PT": "Menu",
+        "sv": "Meny",
+        "th": "เมนู",
+        "zh-CN": "菜单",
+        "zh-TW": "選單"
+      },
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": {
+        "da": "Meddelelseslinje",
+        "de": "Ankündigungsbereich",
+        "en": "Announcement bar",
+        "es": "Barra de anuncios",
+        "fi": "Ilmoituspalkki",
+        "fr": "Barre d'annonces",
+        "hi": "घोषणा बार",
+        "it": "Barra degli annunci",
+        "ja": "告知バー",
+        "ko": "공지 표시줄",
+        "ms": "Bar pengumuman",
+        "nb": "Kunngjøringslinje",
+        "nl": "Aankondigingsbalk",
+        "pt-BR": "Barra de anúncios",
+        "pt-PT": "Barra de comunicado",
+        "sv": "Meddelandefält",
+        "th": "แถบประกาศ",
+        "zh-CN": "公告栏",
+        "zh-TW": "公告列"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "message",
+      "label": {
+        "da": "Vis meddelelse",
+        "de": "Ankündigung anzeigen",
+        "en": "Show announcement",
+        "es": "Mostrar anuncio",
+        "fi": "Näytä ilmoitus",
+        "fr": "Afficher l'annonce",
+        "hi": "घोषणा डिखाएं",
+        "it": "Mostra annuncio",
+        "ja": "告知を表示する",
+        "ko": "공지 표시",
+        "ms": "Tunjukkan pengumuman",
+        "nb": "Vis kunngjøring",
+        "nl": "Aankondiging weergeven",
+        "pt-BR": "Exibir anúncio",
+        "pt-PT": "Mostrar comunicado",
+        "sv": "Visa tillkännagivande",
+        "th": "แสดงประกาศ",
+        "zh-CN": "显示公告",
+        "zh-TW": "顯示公告"
+      },
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": {
+        "da": "Kun startside",
+        "de": "Nur Startseite",
+        "en": "Home page only",
+        "es": "Solo página de inicio",
+        "fi": "Vain kotisivu",
+        "fr": "Page d'accueil uniquement",
+        "hi": "केवल होमपेज",
+        "it": "Solo home page",
+        "ja": "ホームページのみ",
+        "ko": "홈페이지만",
+        "ms": "Halaman utama sahaja",
+        "nb": "Kun på startsiden",
+        "nl": "Alleen startpagina",
+        "pt-BR": "Apenas página inicial",
+        "pt-PT": "Apenas a página inicial",
+        "sv": "Endast hemsida",
+        "th": "หน้าแรกเท่านั้น",
+        "zh-CN": "仅主页",
+        "zh-TW": "僅限首頁"
+      },
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "message_text",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "ms": "Teks",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "ms": "Mengumumkan sesuatu di sini",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+    },
+    {
+      "type": "url",
+      "id": "message_link",
+      "label": {
+        "da": "Link",
+        "de": "Link",
+        "en": "Link",
+        "es": "Enlace",
+        "fi": "Linkki",
+        "fr": "Lien",
+        "hi": "लिंक",
+        "it": "Link",
+        "ja": "リンク",
+        "ko": "링크",
+        "ms": "Pautan",
+        "nb": "Kobling",
+        "nl": "Link",
+        "pt-BR": "Link",
+        "pt-PT": "Ligação",
+        "sv": "Länk",
+        "th": "ลิงก์",
+        "zh-CN": "链接",
+        "zh-TW": "連結"
+      },
+      "info": {
+        "da": "Valgfri",
+        "de": "Optional",
+        "en": "Optional",
+        "es": "Opcional",
+        "fi": "Valinnainen",
+        "fr": "Facultatif",
+        "hi": "वैकल्पिक",
+        "it": "Facoltativo",
+        "ja": "選択させる",
+        "ko": "선택 사항",
+        "ms": "Opsyenal",
+        "nb": "Valgfritt",
+        "nl": "Optioneel",
+        "pt-BR": "Opcional",
+        "pt-PT": "Opcional",
+        "sv": "Valfritt",
+        "th": "ไม่จำเป็น",
+        "zh-CN": "可选",
+        "zh-TW": "(選填)"
+      }
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": {
+        "da": "Bjælke",
+        "de": "Zeile",
+        "en": "Bar",
+        "es": "Barra",
+        "fi": "Palkki",
+        "fr": "Barre",
+        "hi": "बार",
+        "it": "Barra",
+        "ja": "バー",
+        "ko": "바",
+        "ms": "Bar",
+        "nb": "Felt",
+        "nl": "Balk",
+        "pt-BR": "Barra",
+        "pt-PT": "Barra",
+        "sv": "Fält",
+        "th": "แถบ",
+        "zh-CN": "栏",
+        "zh-TW": "橫條"
+      },
+      "default": "#7796a8"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "ms": "Teks",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}  
+ 
